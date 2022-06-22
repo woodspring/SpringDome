@@ -7,5 +7,15 @@ import woodspring.springdome.service.DomeService;
 
 @Service
 public class DomeServiceImpl implements DomeService {
+	
+
+
+	@Override
+	public String buildModel(int pId) {
+		// TODO Auto-generated method stub
+		long startTime = System.nanoTime();
+		// step one, 
+		return null;
+	}
 
 }
