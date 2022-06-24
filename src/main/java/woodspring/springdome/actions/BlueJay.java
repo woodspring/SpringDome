@@ -1,27 +1,21 @@
 package woodspring.springdome.actions;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import woodspring.springdome.model.FlyData;
 
-
-@Component
-public class Hummingbird implements Callable<String> {
-	private static final Logger logger = LoggerFactory.getLogger( Hummingbird.class);
+public class BlueJay {
+private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 	
 	private final static Integer R_NUMBER = 100;
 	
 	private int prodId=0;
-	public Hummingbird( int prodId) {
+	public BlueJay( int prodId) {
 		this.prodId = prodId;
 	}
 	
@@ -49,13 +43,6 @@ public class Hummingbird implements Callable<String> {
 		
 		return flyData;
 	}
-
-	@Override
-	public String call() throws Exception {
-		FlyData flyData = flying( this.prodId);
-		
-		
-		return String.format("{pId:%d,  result:{}}", this.prodId, flyData.toString());
-	}
-
+	
+	
 }
