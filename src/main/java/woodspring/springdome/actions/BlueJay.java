@@ -15,14 +15,17 @@ private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 	private final static Integer R_NUMBER = 100;
 	
 	private int prodId=0;
-	public BlueJay( int prodId) {
+	private int loopId = 0;
+	public BlueJay( int prodId, int loopId) {
 		this.prodId = prodId;
+		this.loopId = loopId;
 	}
 	
-	public FlyData flying(int proId) {
+	public String flying(int proId) {
 		long startTime = System.nanoTime();
 		FlyData flyData = new FlyData();
 		flyData.setPId( proId);
+		flyData.setLId( this.loopId);
 		Random  rand =  new Random ( proId);
 		double[] numbers = IntStream.rangeClosed(1, R_NUMBER)
 				.mapToDouble(ind -> 
@@ -41,7 +44,7 @@ private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 		.setConfd99Low( mean - value).setConfd99Up( mean + value)
 		.setpTime( System.nanoTime() - startTime);
 		
-		return flyData;
+		return flyData.toString();
 	}
 	
 	

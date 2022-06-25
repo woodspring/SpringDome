@@ -2,6 +2,7 @@ package woodspring.springdome.model;
 
 public class FlyData {
 	int pId;
+	int lId;
 	double mean;
 	double variance;
 	double sD;
@@ -18,6 +19,13 @@ public class FlyData {
 	public FlyData setpId(int pId) {
 		this.pId = pId;
 		return this;
+	}
+	public FlyData setLId(int loopId) {
+		this.lId = loopId;
+		return this;		
+	}
+	public int getLoopId() {
+		return lId;
 	}
 	public double getMean() {
 		return mean;
