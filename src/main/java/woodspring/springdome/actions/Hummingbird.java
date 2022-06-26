@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 import woodspring.springdome.model.FlyData;
 
 
-@Component
-public class Hummingbird implements Callable<String> {
+//@Component
+public class Hummingbird implements Callable<FlyData> {
 	private static final Logger logger = LoggerFactory.getLogger( Hummingbird.class);
 	
 	private final static Integer R_NUMBER = 100;
@@ -51,11 +51,11 @@ public class Hummingbird implements Callable<String> {
 	}
 
 	@Override
-	public String call() throws Exception {
+	public FlyData call() throws Exception {
 		FlyData flyData = flying( this.prodId);
+		return flyData;
 		
-		
-		return String.format("{pId:%d,  result:{}}", this.prodId, flyData.toString());
+		//return String.format("{pId:%d,  result:{}}", this.prodId, flyData.toString());
 	}
 
 }

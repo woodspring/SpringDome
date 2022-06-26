@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import woodspring.springdome.actions.Hummingbird;
+import woodspring.springdome.model.FlyData;
 import woodspring.springdome.service.DomeService;
 
 @Service
@@ -25,25 +26,31 @@ public class DomeServiceAsyncImpl implements DomeService {
 
 	final static Integer LOOP_NUM = 100;
 	@Override
-	public String buildModel(int pId) {
-		ExecutorService exSrv = Executors.newFixedThreadPool(4);
-		List<Future> result = IntStream.rangeClosed(1,  LOOP_NUM)
-							.mapToObj( itm -> {
-			var bird = new Hummingbird( pId);
-			Future<String> ret = exSrv.submit( bird);
-			return ret;
-			//CompletableFeature.supplyAsync(exSrv.submit( bird);
-		}).collect(Collectors.toList());
-StringBuffer strB = new StringBuffer();
-		result.stream().forEachOrdered(item -> {
-			try {
-				strB.append(item.get() );
-			} catch (InterruptedException | ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} );
-		return strB.toString();
+	public List<FlyData> buildModel(int pId) {
+		return null;
+//		ExecutorService exSrv = Executors.newFixedThreadPool(4);
+//		StringBuffer strB = new StringBuffer();
+//		//List<Future> result = 
+//		List<Future<FlyData>> retFlyData = IntStream.rangeClosed(1,  LOOP_NUM)
+//							.mapToObj( item -> {
+//								Hummingbird bird = new Hummingbird( pId);
+//								Future<FlyData> ret = exSrv.submit( bird);
+//								return ret;
+//			//CompletableFeature.supplyAsync(exSrv.submit( bird);
+//							})
+//							.collect(Collectors.toList())
+//		.stream().mapToObj( (Future<String>)item -> {
+//			(Future<String>)item.get();
+//		}).collect(collectors.toList());
+		//forEachOrdered(item -> {
+//			try {
+//				strB.append(item.get() );
+//			} catch (InterruptedException | ExecutionException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		} );
+//		return retFlyData;
 	}
 
 }

@@ -69,4 +69,11 @@ public class FlyData {
 		this.pTime = pTime;
 	}
 	
+	//@Override
+	//public String toString() {
+	//	return "FlyData [pId=" + pId + ", lId=" + lId + ", mean=" + mean + ", variance=" + variance + ", sD=" + sD
+	//			+ ", confd99Up=" + confd99Up + ", confd99Low=" + confd99Low + ", pTime=" + pTime + "]";
+	//}
+
+	
 }
