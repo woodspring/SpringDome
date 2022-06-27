@@ -25,9 +25,11 @@ public class DomeController {
 	
 	//@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping("/dome")
-	public List<FlyData> dome(@RequestParam(value="num", required = false, defaultValue = "100") String num) {
+	public List<FlyData> dome(@RequestParam(value="num", required = false, defaultValue = "150") String num) {
 	//public String dome(@RequestParam(required = false, defaultValue = "100") String loopNum) {
+		logger.info("--> DomController, num:{}", num);
 		var ret = synchDome.buildModel(Integer.valueOf(num).intValue());
+		logger.info("<--- DomController, num:{}, ret size:{}, ret:{}", num, ret.size(), ret.toString());
 		return ret;
 		
 	}
