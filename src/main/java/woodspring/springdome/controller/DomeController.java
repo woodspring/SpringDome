@@ -28,8 +28,10 @@ public class DomeController {
 	public List<FlyData> dome(@RequestParam(value="num", required = false, defaultValue = "150") String num) {
 	//public String dome(@RequestParam(required = false, defaultValue = "100") String loopNum) {
 		logger.info("--> DomController, num:{}", num);
+		long runtime =  System.nanoTime();
 		var ret = synchDome.buildModel(Integer.valueOf(num).intValue());
-		logger.info("<--- DomController, num:{}, ret size:{}, ret:{}", num, ret.size(), ret.toString());
+		
+		logger.info("<--[{}]--  DomController, num:{}, ret size:{}, ret:{}", ((System.nanoTime() - runtime) * 10E-10), ret.size(), ret.toString());
 		return ret;
 		
 	}

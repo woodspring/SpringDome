@@ -8,7 +8,7 @@ public class FlyData {
 	double sD;
 	double confd99Up;
 	double confd99Low;
-	long pTime;
+	double pTime;
 	public FlyData setPId(int proId) {
 		this.pId = proId;
 		return this;		
@@ -62,10 +62,10 @@ public class FlyData {
 		this.confd99Low = confd99;
 		return this;
 	}
-	public long getpTime() {
+	public double getpTime() {
 		return pTime;
 	}
-	public void setpTime(long pTime) {
+	public void setpTime(double pTime) {
 		this.pTime = pTime;
 	}
 	

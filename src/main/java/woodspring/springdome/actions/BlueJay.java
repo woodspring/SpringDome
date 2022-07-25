@@ -2,6 +2,7 @@ package woodspring.springdome.actions;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 import org.slf4j.Logger;
@@ -15,15 +16,15 @@ import woodspring.springdome.model.FlyData;
 public class BlueJay {
 private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 	
-	private final static Integer R_NUMBER = 100;
+	private final static Integer R_NUMBER = 3000000;
 	
 	private int prodId=0;
 	private int loopId = 0;
-	private Random  rand;
+	
 	public BlueJay( int prodId, int loopId) {
 		this.prodId = prodId;
 		this.loopId = loopId;
-		rand =  new Random ( prodId+loopId);
+		
 	}
 	
 	public FlyData flying(int proId) {
@@ -31,10 +32,14 @@ private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 		FlyData flyData = new FlyData();
 		flyData.setPId( proId);
 		flyData.setLId( this.loopId);
+		double upbound = 1000;
+		var rand =ThreadLocalRandom.current();
 		//Random  rand =  new Random ( proId);
 		double[] numbers = IntStream.rangeClosed(1, R_NUMBER)
-				.mapToDouble(ind -> 
-					rand.nextGaussian()
+				.mapToDouble(ind -> {
+					//logger.info("->"+ind+" ");
+					return rand.nextDouble(upbound);
+				}
 				).toArray();
 				
 		double mean = Arrays.stream(numbers).average().getAsDouble();
@@ -47,7 +52,7 @@ private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 		double value = alpha*sDerivation/Math.sqrt(n);
 		flyData.setMean( mean).setVariance(variance).setsD(sDerivation)
 		.setConfd99Low( mean - value).setConfd99Up( mean + value)
-		.setpTime( System.nanoTime() - startTime);
+		.setpTime( (System.nanoTime() - startTime)* 10E-10);
 		
 		return flyData;
 	}

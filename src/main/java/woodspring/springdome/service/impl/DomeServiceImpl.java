@@ -21,7 +21,7 @@ public class DomeServiceImpl implements DomeService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(DomeServiceImpl.class);
 
-	final static Integer LOOP_NUM = 100;
+	final static Integer LOOP_NUM = 1001;
 
 	@Override
 	public List<FlyData> buildModel(int pId) {
