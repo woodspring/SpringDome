@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +17,7 @@ import woodspring.springdome.model.FlyData;
 import woodspring.springdome.service.DomeService;
 
 @RestController
+@RequestMapping("/dome")
 public class DomeController {
 	private final static Logger logger = LoggerFactory.getLogger(DomeController.class);
 	
@@ -24,7 +27,7 @@ public class DomeController {
 	DomeService synchDome;
 	
 	//@CrossOrigin(origins = "http://localhost:8080")
-	@GetMapping("/dome")
+	@GetMapping("/loop")
 	public List<FlyData> dome(@RequestParam(value="num", required = false, defaultValue = "150") String num) {
 	//public String dome(@RequestParam(required = false, defaultValue = "100") String loopNum) {
 		logger.info("--> DomeController, num:{}", num);
@@ -35,5 +38,16 @@ public class DomeController {
 		return ret;
 		
 	}
+	
+	@GetMapping({"/action", "/action/{times}"})
+	public List<FlyData> doAction(@PathVariable(required = false)int times) {
+		logger.info("--> DomeController,ACTION times:{}", times);
+		long runtime =  System.nanoTime();
+		var ret = synchDome.buildModel(times);
+		
+		logger.info("<--[{}]--  DomeController ACTION END for , times:{}", ((System.nanoTime() - runtime) * 10E-10), ret.size());
+		return ret;
+	}
+		
 
 }
