@@ -48,6 +48,19 @@ public class DomeController {
 		logger.info("<--[{}]--  DomeController ACTION END for , times:{}", ((System.nanoTime() - runtime) * 10E-10), ret.size());
 		return ret;
 	}
+	
+	@GetMapping({"/action", "/actionTime/{ind}"})
+	public String doActionTime(@PathVariable(required = true)int ind) {
+		int times = 100;
+		StringBuffer strBuf = new StringBuffer();
+		logger.info("--> DomeController,{} ACTION {} times:", ind, times);
+		strBuf.append(String.format("--> DomeController, %d ACTION %d times:", ind, times));
+		long runtime =  System.nanoTime();
+		var ret = synchDome.buildModel(times);
+		strBuf.append(String.format("<--[%d] time: [%15.8f]--  DomeController ACTION END for , size:%d",ind, ((System.nanoTime() - runtime) * 10E-10), ret.size()));
+		logger.info("<--[{}] time: [{}]--  DomeController ACTION END for , size:{}",ind, ((System.nanoTime() - runtime) * 10E-10), ret.size());
+		return strBuf.toString();
+	}
 		
 
 }

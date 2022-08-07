@@ -34,12 +34,8 @@ private static final Logger logger = LoggerFactory.getLogger( BlueJay.class);
 		flyData.setLId( this.loopId);
 		double upbound = 1000;
 		var rand =ThreadLocalRandom.current();
-		//Random  rand =  new Random ( proId);
 		double[] numbers = IntStream.rangeClosed(1, R_NUMBER)
-				.mapToDouble(ind -> {
-					//logger.info("->"+ind+" ");
-					return rand.nextDouble(upbound);
-				}
+				.mapToDouble(ind -> rand.nextDouble(upbound)
 				).toArray();
 				
 		double mean = Arrays.stream(numbers).average().getAsDouble();
